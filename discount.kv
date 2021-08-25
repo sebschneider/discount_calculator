@@ -1,0 +1,157 @@
+<WindowManager>:
+    id: 'manager'
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    name: "main"
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        canvas.before:
+            Rectangle:
+                size: root.size
+                source: 'splash.png'
+
+        FloatLayout:
+            Button:
+                text: "Start"
+                size_hint: 0.3,0.1
+                pos_hint: {"center_x":0.5, "center_y":0.3}
+                background_normal: ''
+                background_color: 0.27, 0.55, 0, 1
+                on_release:
+                    app.root.current = "second"
+                    root.manager.transition.direction = "left"
+
+<SecondWindow>:
+    name: "second"
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+        canvas.before:
+            Rectangle:
+                size: root.size
+                source: 'money1.jpg'
+        BoxLayout:
+            fullprice: fullprice
+            discount: discount
+
+            BoxLayout:
+
+                orientation: 'vertical'
+                font_name: 'DejaVuSans'
+
+                BoxLayout:
+                    padding: 20
+                    id: price
+                    canvas.before:
+                        Color:
+                            rgba: 0.37,0.85,0.62,0.3
+                        Rectangle:
+                            size: self.size
+                            pos: price.pos
+                    canvas:
+                        Color:
+                            rgba: 0.38,0.70,0.16,1
+                        #Line:
+                        #    width: 0.5 * 2
+                        #    rectangle: (self.x, self.y, self.width, self.height)
+                    Label:
+                        size: 0.5 * root.width, 0.2 * root.width
+                        font_size: 0.03 * root.height
+                        text: 'Enter the price($) '
+                        color: 0, 0.7, 0.2, 1
+                    TextInput:
+                        size_hint: 1, 0.3
+                        pos_hint: {'center_y': 0.5}
+                        id: fullprice
+                        height: 80
+                        multiline: False
+                        input_filter: 'float'
+
+                BoxLayout:
+                    padding: 20
+                    id: discount
+                    canvas.before:
+                        Color:
+                            rgba: 0.37,0.85,0.62,0.3
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    canvas:
+                        Color:
+                            rgba: 0.38,0.70,0.16,1
+                        #Line:
+                        #    width: 0.5 * 2
+                        #    rectangle: (self.x, self.y, self.width, self.height)
+                    Label:
+                        size: 0.5 * root.width, 0.2 * root.width
+                        font_size: 0.027 * root.height
+                        text: 'Enter the discount(%) '
+                        color: 0, 0.7, 0.2, 1
+                    TextInput:
+                        size_hint: 1, 0.3
+                        pos_hint: {'center_y': 0.5}
+                        id: discount
+                        height: 80
+                        multiline: False
+                        input_filter: 'float'
+                FloatLayout:
+                    Button:
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+                        size_hint: 0.3 , 0.4
+                        background_normal: ''
+                        background_color: 0.27, 0.55, 0, 1
+                        id: calculate
+                        text: 'Calculate'
+                        font_size: 0.03 * root.height
+
+                        on_press: root.button(fullprice, discount)
+
+                BoxLayout:
+                    id: payment
+                    Label:
+                        font_size: 0.05 * root.height
+                        text: 'You pay $'
+                        color: 0, 0.7, 0.2, 1
+                        canvas.before:
+                            Color:
+                                rgba: 0.37,0.85,0.62,0.3
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                    Label:
+                        font_size: 0.05 * root.height
+                        color: 0, 0.7, 0.2, 1
+                        id: payment_result
+                        canvas.before:
+                            Color:
+                                rgba: 0.37,0.85,0.62,0.3
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                BoxLayout:
+                    id: savings
+
+                    Label:
+
+                        font_size: 0.05 * root.height
+                        text: 'You save $'
+                        color: 0, 0.7, 0.2, 1
+                        canvas.before:
+                            Color:
+                                rgba: 0.37,0.85,0.62,0.3
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                    Label:
+                        font_size: 0.05 * root.height
+                        color: 0, 0.7, 0.2, 1
+                        id: savings_result
+                        canvas.before:
+                            Color:
+                                rgba: 0.37,0.85,0.62,0.3
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
